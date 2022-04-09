@@ -2,5 +2,24 @@
   "name": "Fyndr",
   "description": "We gon' fynd dat image yo!",
   "version": "0.420.69",
-  "manifest_version": 3
+  "manifest_version": 3,
+  "background": {
+    "service_worker": "background.js"
+  },
+  "permissions": ["storage", "activeTab", "scripting"],
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "/images/spunchbop16.png",
+      "32": "/images/spunchbop32.png",
+      "48": "/images/spunchbop48.png",
+      "128": "/images/spunchbop128.png"
+    }
+  },
+  "icons": {
+    "16": "/images/spunchbop16.png",
+    "32": "/images/spunchbop32.png",
+    "48": "/images/spunchbop48.png",
+    "128": "/images/spunchbop128.png"
+  }
 }
