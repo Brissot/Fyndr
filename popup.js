@@ -8,17 +8,36 @@ chrome.storage.sync.get("color", ({ color }) => {
 // When the button is clicked, inject setPageBackgroundColor into current page
 changeColor.addEventListener("click", async () => {
     let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
-  
+
     chrome.scripting.executeScript({
       target: { tabId: tab.id },
-      function: upload,
+      function: search,
     });
   });
   
   // The body of this function will be executed as a content script inside the
   // current page
-  function upload() {
+  function search() {
     var input = document.createElement('input');
     input.type = 'file';
+    input.accept = '.png, .jpg';
+
+    input.onchange = e => {
+        var file = e.target.files[0];
+        var imgs = document.getElementsByTagName("img");
+
+        var reader = new FileReader();
+        reader.readAsDataURL(file);
+
+        reader.onload = readerEvent => {
+            var content = readerEvent.target.result;
+
+            for (var i = 0; i < imgs.length; i++) {
+                console.log(content);
+                imgs[i].src = content;
+            }
+        }
+    }
+
     input.click();
   }
