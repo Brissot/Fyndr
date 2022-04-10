@@ -20,7 +20,7 @@ changeColor.addEventListener("click", async () => {
   function search() {
     var input = document.createElement('input');
     input.type = 'file';
-    input.accept = '.png, .jpg';
+    input.accept = '.png, .jpg, .gif';
 
     input.onchange = e => {
         var file = e.target.files[0];
