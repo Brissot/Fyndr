@@ -11,14 +11,14 @@ changeColor.addEventListener("click", async () => {
   
     chrome.scripting.executeScript({
       target: { tabId: tab.id },
-      function: setPageBackgroundColor,
+      function: upload,
     });
   });
   
   // The body of this function will be executed as a content script inside the
   // current page
-  function setPageBackgroundColor() {
-    chrome.storage.sync.get("color", ({ color }) => {
-      document.body.style.backgroundColor = color;
-    });
+  function upload() {
+    var input = document.createElement('input');
+    input.type = 'file';
+    input.click();
   }
