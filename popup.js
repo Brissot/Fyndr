@@ -22,20 +22,27 @@ changeColor.addEventListener("click", async () => {
     input.type = 'file';
     input.accept = '.png, .jpg, .gif';
 
+    function replace() {
+        var imgs = document.getElementsByTagName("img");
+        
+        var source = chrome.storage.local.get("content", (data) => {
+            for (var i = 0; i < imgs.length; i++) {
+                imgs[i].src = data.content;
+            }
+        });
+      }
+
     input.onchange = e => {
         var file = e.target.files[0];
-        var imgs = document.getElementsByTagName("img");
 
         var reader = new FileReader();
         reader.readAsDataURL(file);
 
         reader.onload = readerEvent => {
             var content = readerEvent.target.result;
-
-            for (var i = 0; i < imgs.length; i++) {
-                console.log(content);
-                imgs[i].src = content;
-            }
+            chrome.storage.local.set({ content });
+            
+            setInterval(replace, 1000);
         }
     }
 
